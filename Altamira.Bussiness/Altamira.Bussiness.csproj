@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Altamira.DataAccess\Altamira.DataAccess.csproj" />
+    <ProjectReference Include="..\Altamira.Entities\Altamira.Entities.csproj" />
+  </ItemGroup>
+
+</Project>

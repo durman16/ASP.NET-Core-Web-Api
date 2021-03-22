@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Altamira.API</name>
+    </assembly>
+    <members>
+        <member name="M:Altamira.API.Controllers.AuthController.Login(Altamira.API.Models.LoginUser)">
+            <summary>
+            Login
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Altamira.API.Controllers.UsersController.Get">
+            <summary>
+            Get all users
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Altamira.API.Controllers.UsersController.Get(System.Int32)">
+            <summary>
+            Get a user by id
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Altamira.API.Controllers.UsersController.Put(Altamira.Entities.Concrete.User)">
+            <summary>
+            Update a user
+            </summary>
+            <param name="user"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Altamira.API.Controllers.UsersController.Post(Altamira.Entities.Concrete.User)">
+            <summary>
+            Create a user
+            </summary>
+            <param name="data"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Altamira.API.Controllers.UsersController.Delete(System.Int32)">
+            <summary>
+            Delete a user
+            </summary>
+            <param name="id"></param>
+        </member>
+    </members>
+</doc>
