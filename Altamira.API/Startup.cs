@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System;
+using System.IO;
+using System.Reflection;
 using System.Text;
 
 namespace Altamira.API
@@ -55,7 +58,12 @@ namespace Altamira.API
                 {
                     Version = "1.0.0",
                     Title = "Altamira",
-                    Description="Altamira API"
+                    Description="Altamira API",
+                    Contact = new OpenApiContact
+                    {
+                        Name = "Tugba Durman",
+                        Email = "tugbadurman@altamira.com"
+                    },
                 });
                 swagger.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
                 {
@@ -81,6 +89,9 @@ namespace Altamira.API
 
                     }
                 });
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                swagger.IncludeXmlComments(xmlPath);
             }
                 );
             //services.AddDbContext<AltamiraDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AltamiraDbContext")));

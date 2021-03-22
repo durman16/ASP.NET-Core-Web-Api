@@ -17,9 +17,8 @@ namespace Altamira.API.Controllers
         {
             _userService = userService;
         }
-
         /// <summary>
-        /// Get all users
+        /// Get All Users
         /// </summary>
         /// <returns></returns>
         [HttpGet]
