@@ -27,6 +27,7 @@ namespace Altamira.DataAccess
                         newpass[j] = password[(int)(35 * random.NextDouble())];
                     }
                     var client = new WebClient();
+                    //TODO: https://jsonplaceholder.typicode.com/users endpointinden tüm datayı çekip ondan sonra işlem yapman gerekiyor.
                     var newUser = client.DownloadString("https://jsonplaceholder.typicode.com/users/" + i.ToString());
                     User user = JsonConvert.DeserializeObject<User>(newUser);
                     User createdUser = new User();

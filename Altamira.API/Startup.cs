@@ -1,11 +1,13 @@
 using Altamira.Bussiness.Abstract;
 using Altamira.Bussiness.Concrete;
+using Altamira.Bussiness.Mapper;
 using Altamira.DataAccess;
 using Altamira.DataAccess.Abstract;
 using Altamira.DataAccess.Concrete;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -48,10 +50,11 @@ namespace Altamira.API
                 };
             });
             //services.AddAuthentication("Authentication").AddScheme<AuthenticationSchemeOptions, AuthenticationHandler>("Authentication",null);
-            services.AddSingleton<IUserService, UserManager>();
-            services.AddSingleton<IUserRepostory, UserRepostory>();
-            services.AddSingleton<IAuthService, AuthManager>();
-            services.AddSingleton<IAuthRepostory, AuthRepostory>();
+            services.AddScoped<IUserService, UserManager>();
+            services.AddScoped<IUserRepostory, UserRepostory>();
+            services.AddScoped<IAuthService, AuthManager>();
+            services.AddScoped<IAuthRepostory, AuthRepostory>();
+
             services.AddSwaggerGen(swagger =>
             {
                 swagger.SwaggerDoc("v1", new OpenApiInfo
@@ -94,10 +97,18 @@ namespace Altamira.API
                 swagger.IncludeXmlComments(xmlPath);
             }
                 );
-            //services.AddDbContext<AltamiraDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AltamiraDbContext")));
+            
+            services.AddDbContext<AltamiraDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AltamiraDbContext")));
+
+            //-------Auto Mapper----///
+            var config = new AutoMapper.MapperConfiguration(c => c.AddProfile(new AutoMapperInit()));
+
+            var mapper = config.CreateMapper();
+            services.AddSingleton(mapper);
+            //-----------AutoMapper--------//
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, AltamiraDbContext dbContext)
         {
             if (env.IsDevelopment())
             {
@@ -115,8 +126,8 @@ namespace Altamira.API
 
             });
             //app.UseSwaggerUi3();
-            var context = new AltamiraDbContext();
-            Data.FakeData(context);
+            //var context = new AltamiraDbContext();
+            Data.FakeData(dbContext);
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

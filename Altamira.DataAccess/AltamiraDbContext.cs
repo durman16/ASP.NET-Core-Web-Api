@@ -9,21 +9,31 @@ using System.Text;
 
 namespace Altamira.DataAccess
 {
-    public class AltamiraDbContext:DbContext
+    public class AltamiraDbContext : DbContext
     {
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public AltamiraDbContext(DbContextOptions<AltamiraDbContext> options) : base(options)
         {
-            IConfigurationRoot configuration = new ConfigurationBuilder()
-                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                .AddJsonFile("appsettings.json")
-                .Build();
-            optionsBuilder.UseSqlServer(configuration.GetConnectionString("AltamiraDbContext"));
-            base.OnConfiguring(optionsBuilder);
         }
+
+        public AltamiraDbContext()
+        {
+
+        }
+
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    IConfigurationRoot configuration = new ConfigurationBuilder()
+        //        .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+        //        .AddJsonFile("appsettings.json")
+        //        .Build();
+        //    optionsBuilder.UseSqlServer(configuration.GetConnectionString("AltamiraDbContext"));
+        //    base.OnConfiguring(optionsBuilder);
+        //}
         public DbSet<User> Users { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Address> Addresses { get; set; }
         public DbSet<Geo> geos { get; set; }
-        
+
     }
 }
