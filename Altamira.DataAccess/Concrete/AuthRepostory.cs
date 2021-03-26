@@ -11,15 +11,17 @@ namespace Altamira.DataAccess.Concrete
 {
     public class AuthRepostory : IAuthRepostory
     {
+        public AltamiraDbContext _userDbContext { get; set; }
+        public AuthRepostory(AltamiraDbContext userDbContext)
+        {
+            _userDbContext = userDbContext;
+        }
         public User AuthenticateUser(string email, string password)
         {
-            using (var userDbContext = new AltamiraDbContext())
-            {
-                return userDbContext.Users
+                return _userDbContext.Users
                                     .Where(u => u.email == email && u.password == password)
                                     .Include(s => s.address).Include(s => s.company).Include(s => s.address.geo)
                                     .FirstOrDefault();
-            }
         }
     }
 }

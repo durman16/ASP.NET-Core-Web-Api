@@ -11,65 +11,55 @@ namespace Altamira.DataAccess.Concrete
 {
     public class UserRepostory : IUserRepostory
     {
+        public AltamiraDbContext _userDbContext { get; set; }
+        public UserRepostory(AltamiraDbContext userDbContext)
+        {
+            _userDbContext = userDbContext;
+        }
         public async Task<User> CreateUser(User user)
         {
-            using (var userDbContext = new AltamiraDbContext())
+            //TODO : FakeData metodunda da aynı yapıyı kullanmışsın. Bunu bir helper metod üzerinden kod çoklamadan kullanman daha iyi olur.
+            string password = "abcdefghijklmnoprstuvwxyz0123456789";
+            Random random = new Random();
+            char[] newpass = new char[5];
+            for (int i = 0; i < 5; i++)
             {
-                string password = "abcdefghijklmnoprstuvwxyz0123456789";
-                Random random = new Random();
-                char[] newpass = new char[5];
-                for(int i = 0; i < 5; i++)
-                {
-                    newpass[i] = password[(int)(35 * random.NextDouble())];
-                }
-                user.password = new string(newpass);
-                userDbContext.Add<User>(user);
-                await userDbContext.SaveChangesAsync();
-                return user;
+                newpass[i] = password[(int)(35 * random.NextDouble())];
             }
+            user.password = new string(newpass);
+            _userDbContext.Add(user);
+            await _userDbContext.SaveChangesAsync();
+            return user;
         }
 
         public async Task DeleteUser(int id)
         {
-            using (var userDbContext = new AltamiraDbContext())
-            {
-                var deleteduser = await GetUserById(id);
-                userDbContext.geos.Remove(deleteduser.address.geo);
-                userDbContext.Addresses.Remove(deleteduser.address);
-                userDbContext.Companies.Remove(deleteduser.company);
-                userDbContext.Users.Remove(deleteduser);
-                await userDbContext.SaveChangesAsync();
-            }
+            var deleteduser = await GetUserById(id);
+            _userDbContext.geos.Remove(deleteduser.address.geo);
+            _userDbContext.Addresses.Remove(deleteduser.address);
+            _userDbContext.Companies.Remove(deleteduser.company);
+            _userDbContext.Users.Remove(deleteduser);
+            await _userDbContext.SaveChangesAsync();
         }
 
         public async Task<User> GetUserById(int id)
         {
-            using (var userDbContext = new AltamiraDbContext())
-            {
-                return await userDbContext.Users
-                                    .Where(u => u.id == id)
-                                    .Include(s => s.address).Include(s => s.company).Include(s => s.address.geo)
-                                    .FirstOrDefaultAsync();
-            }
+            return await _userDbContext.Users
+                                .Where(u => u.id == id)
+                                .Include(s => s.address).Include(s => s.company).Include(s => s.address.geo)
+                                .FirstOrDefaultAsync();
         }
 
         public async Task<List<User>> GetUsers()
         {
-            using (var userDbContext = new AltamiraDbContext())
-            {
-                return await userDbContext.Users.Include(s => s.address).Include(s => s.company).Include(s => s.address.geo).ToListAsync();
-            }
+            return await _userDbContext.Users.Include(s => s.address).Include(s => s.company).Include(s => s.address.geo).ToListAsync();
         }
 
         public async Task<User> UpdateUser(User user)
         {
-            using (var userDbContext = new AltamiraDbContext())
-            {
-                userDbContext.Update(user);
-                await userDbContext.SaveChangesAsync();
-                return user;
-
-            }
+            _userDbContext.Update(user);
+            await _userDbContext.SaveChangesAsync();
+            return user;
         }
     }
 }

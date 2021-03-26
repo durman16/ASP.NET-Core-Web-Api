@@ -23,14 +23,14 @@
             <param name="id"></param>
             <returns></returns>
         </member>
-        <member name="M:Altamira.API.Controllers.UsersController.Put(Altamira.Entities.Concrete.User)">
+        <member name="M:Altamira.API.Controllers.UsersController.Put(Altamira.Entities.Concrete.UserDto)">
             <summary>
             Update a user
             </summary>
             <param name="user"></param>
             <returns></returns>
         </member>
-        <member name="M:Altamira.API.Controllers.UsersController.Post(Altamira.Entities.Concrete.User)">
+        <member name="M:Altamira.API.Controllers.UsersController.Post(Altamira.Entities.Concrete.UserDto)">
             <summary>
             Create a user
             </summary>
