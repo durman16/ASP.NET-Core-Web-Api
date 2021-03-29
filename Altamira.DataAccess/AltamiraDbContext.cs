@@ -23,11 +23,11 @@ namespace Altamira.DataAccess
 
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
-        //    IConfigurationRoot configuration = new ConfigurationBuilder()
+        //IConfigurationRoot configuration = new ConfigurationBuilder()
         //        .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-        //        .AddJsonFile("appsettings.json")
-        //        .Build();
-        //    optionsBuilder.UseSqlServer(configuration.GetConnectionString("AltamiraDbContext"));
+        //       .AddJsonFile("appsettings.json")
+        //       .Build();
+        //      optionsBuilder.UseSqlServer(configuration.GetConnectionString("AltamiraDbContext"));
         //    base.OnConfiguring(optionsBuilder);
         //}
         public DbSet<User> Users { get; set; }

@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.31005.135
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altamira.Entities", "Altamira.Entities\Altamira.Entities.csproj", "{C68ABF64-8105-42C3-A91D-FCD79471641B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altamira.DataAccess", "Altamira.DataAccess\Altamira.DataAccess.csproj", "{C48C6859-EC5B-41F9-A8F8-8E946DFB84F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altamira.DataAccess", "Altamira.DataAccess\Altamira.DataAccess.csproj", "{C48C6859-EC5B-41F9-A8F8-8E946DFB84F3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altamira.Bussiness", "Altamira.Bussiness\Altamira.Bussiness.csproj", "{FA6DAC4D-8588-448D-ABE8-DB0577E1C02A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altamira.Bussiness", "Altamira.Bussiness\Altamira.Bussiness.csproj", "{FA6DAC4D-8588-448D-ABE8-DB0577E1C02A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Altamira.API", "Altamira.API\Altamira.API.csproj", "{10898642-569B-455A-9D62-1D352A383921}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Altamira.API", "Altamira.API\Altamira.API.csproj", "{10898642-569B-455A-9D62-1D352A383921}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
